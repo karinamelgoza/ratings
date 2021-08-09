@@ -38,12 +38,16 @@ def load_users():
 def load_movies():
     """Load movies from u.item into database."""
 
+    print('Movies')
+
+    Movie.query.delete()
+
     for row in open('seed_data/u.item'):
         row = row.rstrip()
         date_format = '%d-%b-%Y'
         movie_id, title_date, date, vid_release, imdb_url, unknown, action, adventure, animation, childrens, comedy, crime, doc, drama, fantasy, noir, horror, musical, mystery, romance, scifi, thriller, war, western = row.split(
             '|')
-        title = title_date.split('(')[0]
+        title = title_date.split('(')[0].strip()
         released_at = datetime.strptime(date, date_format)
 
         movie = Movie(movie_id=movie_id, title=title,
@@ -56,6 +60,10 @@ def load_movies():
 
 def load_ratings():
     """Load ratings from u.data into database."""
+
+    print('Ratings')
+
+    Rating.query.delete()
 
     for row in open('seed_data/u.data'):
         row = row.rstrip()

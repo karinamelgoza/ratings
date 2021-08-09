@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST">
+
+    <h2>Register</h2>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email">
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+
+    <label for="age">Age:</label>
+    <input type="text" name="age" id="age">
+
+    <label for="zipcode">Zipcode:</label>
+    <input type="text" name="zipcode" id="zipcode">
+
+    <button type="submit">Register</button>
+
+</form>
+
+{% endblock%}
