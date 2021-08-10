@@ -9,7 +9,7 @@
 <h4>Ratings</h4>
 <ul>
     {% for i in user_ratings %}
-    <li>{{ i.movie.title }} {{i.score}}</li>
+    <li>{{ i.movie.title }} | Score: {{i.score}}</li>
     {% endfor %}
 </ul>
 

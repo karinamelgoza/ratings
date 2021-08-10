@@ -32,6 +32,13 @@ def user_list():
     return render_template('user_list.html', users=users)
 
 
+@app.route('/movies')
+def movie_list():
+
+    movies = Movie.query.order_by('title')
+    return render_template('movies.html', movies=movies)
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def new_user():
 
@@ -60,7 +67,10 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(email=f'{email}').first()
 
-        if password == user.password:
+        if not user:
+            flash('user not found')
+            return redirect('/register')
+        elif password == user.password:
             session['logged_in'] = email
             flash("Logged in")
             return redirect('/')
@@ -86,6 +96,13 @@ def user_page(user_id):
     user_ratings = Rating.query.filter_by(user_id=user_id).all()
     user = User.query.get(user_id)
     return render_template('user_details.html', user=user, user_ratings=user_ratings)
+
+
+@app.route('/movies/<int:movie_id>')
+def movie_details(movie_id):
+
+    movie_details = Rating.query.filter_by(movie_id=movie_id).all()
+    return render_template('movie_details.html', movie_details=movie_details)
 
 
 if __name__ == "__main__":
