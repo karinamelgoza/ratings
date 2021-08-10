@@ -3,7 +3,15 @@
 {% block content %}
 
 <h3>User Id: {{ user.user_id }}</h3>
+<p>Age: {{ user.age }}</p>
 <p>Zipcode: {{ user.zipcode }}</p>
+
+<h4>Ratings</h4>
+<ul>
+    {% for i in user_ratings %}
+    <li>{{ i.movie.title }} {{i.score}}</li>
+    {% endfor %}
+</ul>
 
 
 {% endblock %}

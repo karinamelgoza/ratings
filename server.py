@@ -83,8 +83,9 @@ def logout():
 @app.route('/users/<int:user_id>')
 def user_page(user_id):
 
+    user_ratings = Rating.query.filter_by(user_id=user_id).all()
     user = User.query.get(user_id)
-    return render_template('user_details.html', user=user)
+    return render_template('user_details.html', user=user, user_ratings=user_ratings)
 
 
 if __name__ == "__main__":
