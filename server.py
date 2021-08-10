@@ -71,7 +71,7 @@ def login():
             flash('user not found')
             return redirect('/register')
         elif password == user.password:
-            session['logged_in'] = email
+            session['logged_in'] = user.user_id
             flash("Logged in")
             return redirect('/')
         else:
@@ -98,8 +98,19 @@ def user_page(user_id):
     return render_template('user_details.html', user=user, user_ratings=user_ratings)
 
 
-@app.route('/movies/<int:movie_id>')
+@app.route('/movies/<int:movie_id>', methods=['GET', 'POST'])
 def movie_details(movie_id):
+
+    if request.method == 'POST':
+
+        new_rating = Rating(movie_id=movie_id,
+                            user_id=session.get('logged_in'), score=request.form['score'])
+
+        db.session.add(new_rating)
+        db.session.commit()
+
+        flash('rating added')
+        return redirect('/movies')
 
     movie_details = Rating.query.filter_by(movie_id=movie_id).all()
     return render_template('movie_details.html', movie_details=movie_details)

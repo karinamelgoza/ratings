@@ -12,6 +12,15 @@
     <li>User {{ i.user.user_id }} | Score: {{i.score}}</li>
     {% endfor %}
 </ul>
+{% if session.get('logged_in') %}
+<aside>
+    <form method="POST">
+        <label for="score">Score:</label>
+        <input type="text" name="score" id="score">
+        <button type="submit">Submit</button>
+    </form>
+</aside>
+{% endif %}
 
 
 {% endblock %}

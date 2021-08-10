@@ -9,11 +9,5 @@
 <h2>Users</h2>
 <p><a href="/users">View all users</a></p>
 
-<a href="/register">Register</a>
-{% if session.get('logged_in') %}
-<a href="/logout">Log out</a>
-{% else %}
-<a href="/login">Log in</a>
-{% endif %}
 
 {% endblock %}
